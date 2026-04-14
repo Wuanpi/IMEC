@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-  ImageBackground,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -12,83 +11,74 @@ import {
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
+const fondoJpg = require('../../assets/images/fondo.jpg');
 
 export const LoginScreen: React.FC = () => {
   const router = useRouter();
-  const [username, setUsername] = useState<string>('');
+  const [username, setUsername] = useState<string>(''); 
   const [password, setPassword] = useState<string>('');
   const [rememberPassword, setRememberPassword] = useState<boolean>(false);
-  const backgroundImage = require('../../assets/images/fondo.jpg');
-  
+  const fondoJpg = require('@/assets/images/fondo.jpg');
+
   const handleLogin = (): void => {
     console.log('Login payload:', { username, password, rememberPassword });
   };
 
   return (
-    <ImageBackground source={backgroundImage} style={styles.background} resizeMode="cover">
-      <View style={styles.overlay}>
-        <SafeAreaView style={styles.screen} edges={['top', 'bottom']}>
-          <KeyboardAvoidingView
-            style={styles.keyboardContainer}
-            behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-            <ScrollView
-              contentContainerStyle={styles.scrollContent}
-              keyboardShouldPersistTaps="handled"
-              showsVerticalScrollIndicator={false}>
-              <View style={styles.logoArea}>
-                <Text style={styles.logoText}>IM INGENIERIA </Text>
-              </View>
+    <SafeAreaView style={styles.screen} edges={['top', 'bottom']}>
+      <KeyboardAvoidingView
+        style={styles.keyboardContainer}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}>
+          <View style={styles.logoArea}>
+            <Text style={styles.logoText}>IM INGENIERIA </Text>
+          </View>
 
-              <View style={styles.formContainer}>
-                <TextInput
-                  value={username}
-                  onChangeText={setUsername}
-                  placeholder="Usuario"
-                  placeholderTextColor="#9CA3AF"
-                  autoCapitalize="none"
-                  style={styles.input}
-                />
+          <View style={styles.formContainer}>
+            <TextInput
+              value={username}
+              onChangeText={setUsername}
+              placeholder="Usuario"
+              placeholderTextColor="#9CA3AF"
+              autoCapitalize="none"
+              style={styles.input}
+            />
 
-                <TextInput
-                  value={password}
-                  onChangeText={setPassword}
-                  placeholder="Contraseña"
-                  placeholderTextColor="#9CA3AF"
-                  secureTextEntry
-                  style={styles.input}
-                />
+            <TextInput
+              value={password}
+              onChangeText={setPassword}
+              placeholder="Contraseña"
+              placeholderTextColor="#9CA3AF"
+              secureTextEntry
+              style={styles.input}
+            />
 
-                <Pressable style={styles.rememberRow} onPress={() => setRememberPassword((prev) => !prev)}>
-                  <View style={[styles.checkbox, rememberPassword && styles.checkboxChecked]} />
-                  <Text style={styles.rememberText}>Recordar contraseña</Text>
-                </Pressable>
+            <Pressable style={styles.rememberRow} onPress={() => setRememberPassword((prev) => !prev)}>
+              <View style={[styles.checkbox, rememberPassword && styles.checkboxChecked]} />
+              <Text style={styles.rememberText}>Recordar contraseña</Text>
+            </Pressable>
 
-                <Pressable style={styles.loginButton} onPress={handleLogin}>
-                  <Text style={styles.loginButtonText}>Ingresar</Text>
-                </Pressable>
+            <Pressable style={styles.loginButton} onPress={handleLogin}>
+              <Text style={styles.loginButtonText}>Ingresar</Text>
+            </Pressable>
 
-                <Pressable style={styles.secondaryButton} onPress={() => router.push('/forgot-password')}>
-                  <Text style={styles.forgotPasswordText}>¿Olvidaste tu contraseña?</Text>
-                </Pressable>
-              </View>
-            </ScrollView>
-          </KeyboardAvoidingView>
-        </SafeAreaView>
-      </View>
-    </ImageBackground>
+            <Pressable style={styles.secondaryButton} onPress={() => router.push('/forgot-password')}>
+              <Text style={styles.forgotPasswordText}>¿Olvidaste tu contraseña?</Text>
+            </Pressable>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  background: {
-    flex: 1,
-  },
-  overlay: {
-    flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.76)',
-  },
   screen: {
     flex: 1,
+    backgroundColor: '#FFFFFF',
   },
   keyboardContainer: {
     flex: 1,
